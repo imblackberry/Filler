@@ -10,7 +10,7 @@
 #                                                                              #
 #******************************************************************************#
 
-NAME = vblokha
+NAME = vblokha.filler
 
 FT_PRINTF = ft_printf
 
@@ -22,7 +22,6 @@ FLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(OBJ)
-
 
 	gcc $(FLAGS) $(SRC) -o $(NAME)
 
