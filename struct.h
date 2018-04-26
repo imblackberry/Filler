@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filler.h                                           :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblokha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/26 12:40:54 by vblokha           #+#    #+#             */
-/*   Updated: 2018/04/26 12:40:55 by vblokha          ###   ########.fr       */
+/*   Created: 2018/04/26 13:35:29 by vblokha           #+#    #+#             */
+/*   Updated: 2018/04/26 13:35:30 by vblokha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLER_H
-#define FILLER_H
+#ifndef STRUCT_H
+#define STRUCT_H
 
-#include "struct.h"
-#include "functions.h"
+typedef struct s_game
+{
+    char sign;
+    t_map *map;
+    t_piece *piece;
+}               t_game;
 
-#include "ft_printf/ft_printf.h"
-#include <stdio.h>//DEEEEEEEEEEEEEEEL
-#include "ft_printf/libft/get_next_line.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <string.h>//-----
-#include <errno.h>//?????
-#include <unistd.h>//??????
+typedef struct s_map
+{
+    int x;
+    int y;
+}               t_map;
 
-
+typedef struct s_piece
+{
+    int x;
+    int y;
+}               t_piece;
 
 #endif

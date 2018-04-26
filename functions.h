@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filler.h                                           :+:      :+:    :+:   */
+/*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblokha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/26 12:40:54 by vblokha           #+#    #+#             */
-/*   Updated: 2018/04/26 12:40:55 by vblokha          ###   ########.fr       */
+/*   Created: 2018/04/26 12:54:19 by vblokha           #+#    #+#             */
+/*   Updated: 2018/04/26 12:54:21 by vblokha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLER_H
-#define FILLER_H
+#ifndef FUNCIONS_H
+#define FUNCIONS_H
 
 #include "struct.h"
-#include "functions.h"
 
-#include "ft_printf/ft_printf.h"
-#include <stdio.h>//DEEEEEEEEEEEEEEEL
-#include "ft_printf/libft/get_next_line.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <string.h>//-----
-#include <errno.h>//?????
-#include <unistd.h>//??????
-
-
+int start_game();
+t_game *set_game_struct(t_game *game);
+void set_player_sign(fd, t_game **game);
+int read_map(int fd);
 
 #endif

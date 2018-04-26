@@ -10,48 +10,71 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_printf.h"
-#include <stdio.h>//DEEEEEEEEEEEEEEEL
-#include "ft_printf/libft/get_next_line.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <string.h>//-----
-#include <errno.h>//?????
-#include <unistd.h>//??????
-
 #include "filler.h"
 
-int my_reading(int fd)
+int main()
+{
+    int ret;
+
+    ret = start_game();
+   // system("leaks a.out");
+    return (ret);
+}
+
+int start_game()
+{
+    int fd;
+    t_game *game;
+
+    game = NULL;
+    fd = open("test.txt", O_RDONLY);
+    game = set_game_struct(&game);
+    set_sign(fd, &game);
+    read_map(fd, &game);
+}
+
+t_game *set_game_struct(t_game *game)
+{
+    game = (t_game*)malloc(sizeof(t_game));
+
+    if (game)
+    {
+        game->sign = '\0';
+        game->map = NULL;
+        game->piece = NULL;
+    }
+    return (game);
+}
+
+void set_player_sign(fd, t_game **game)
+{
+    int gnl;
+    char *line;
+
+    while ((gnl = get_next_line(fd, &line)))
+    {
+        if (ft_strstr(line, "vblokha"))
+            break ;
+        free(line);
+    }
+    if (ft_strchr(line, '1'))
+        game->sign = 'o';
+    else if (ft_strchr(line, '2'))
+        game->sign = 'x';
+    ft_strdel(&line);
+}
+
+int read_map(int fd)
 {
     char *line;
     int gnl;
     char *file;
+    char *save;
 
     file = NULL;
-    while ((gnl = get_next_line(fd, &line)))
-    {
-        if (file)
-            file = ft_strjoin(file, line);
-        else
-            file = ft_strdup(line);
- //printf("line = |%s|\n", line);
-       file = ft_strcat(file, ft_strdup("\n"));
-       // printf("file = |%s|\n", file);   
-    }
-//    printf("file = |%s|\n", file);
+   
+    printf("file = |%s|\n", file);
     return (0);
 }
-int main()
-{
-    //char *file;
-    //file = NULL;
-    int fd;
 
-    fd = open("test.txt", O_RDONLY);
-    my_reading(fd);
 
-    // file = ft_strcat(ft_strdup(file) , ft_strdup("kykyky"));
-    // printf("file = |%s|\n", file);
-    return (0);
-}
