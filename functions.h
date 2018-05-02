@@ -22,5 +22,7 @@ void    join_free(char **s1, char *s2);
 void    free_game(t_game **game);
 void    set_map(t_game **game);
 void    set_piece(t_game **game);
+void    set_opponent_sign(t_game **game);
+void    try_to_set_case(t_game **game, int i, int j);
 
 #endif

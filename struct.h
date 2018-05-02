@@ -20,14 +20,22 @@ typedef struct s_square
     char **arr;
 }               t_square;
 
+typedef struct s_case
+{
+    int case_x;
+    int case_y;
+    struct s_case *next;
+}               t_case;
 
 typedef struct s_game
 {
-    char sign;
+    char my_sign;
+    char opponent_sign;
     char *file;
     char **arrfile;
     t_square *map;
     t_square *piece;
+    t_case *valid_case;
 }               t_game;
 
 
