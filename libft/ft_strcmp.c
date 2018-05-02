@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filler.h                                           :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblokha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/26 12:40:54 by vblokha           #+#    #+#             */
-/*   Updated: 2018/04/26 12:40:55 by vblokha          ###   ########.fr       */
+/*   Created: 2017/10/30 14:40:06 by vblokha           #+#    #+#             */
+/*   Updated: 2017/11/18 17:11:42 by vblokha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLER_H
-#define FILLER_H
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	int				i;
+	unsigned char	*ss1;
+	unsigned char	*ss2;
 
-#include "struct.h"
-#include "functions.h"
-
-#include <stdio.h>//DEEEEEEEEEEEEEEEL
-#include "libft/libft.h"
-#include "libft/get_next_line.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <string.h>//-----
-#include <errno.h>//?????
-#include <unistd.h>//??????
-
-#endif
+	ss1 = (unsigned char*)s1;
+	ss2 = (unsigned char*)s2;
+	i = 0;
+	while (ss1[i] == ss2[i] && ss1[i] && ss2[i])
+		i++;
+	return (ss1[i] - ss2[i]);
+}

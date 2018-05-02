@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filler.h                                           :+:      :+:    :+:   */
+/*   ft_strtoupper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblokha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/26 12:40:54 by vblokha           #+#    #+#             */
-/*   Updated: 2018/04/26 12:40:55 by vblokha          ###   ########.fr       */
+/*   Created: 2018/04/10 15:50:39 by vblokha           #+#    #+#             */
+/*   Updated: 2018/04/10 15:50:41 by vblokha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLER_H
-#define FILLER_H
+#include "libft.h"
 
-#include "struct.h"
-#include "functions.h"
+char	*ft_strtoupper(char *s)
+{
+	int i;
 
-#include <stdio.h>//DEEEEEEEEEEEEEEEL
-#include "libft/libft.h"
-#include "libft/get_next_line.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <string.h>//-----
-#include <errno.h>//?????
-#include <unistd.h>//??????
-
-#endif
+	i = 0;
+	while (s[i])
+	{
+		s[i] = ft_toupper((int)s[i]);
+		i++;
+	}
+	return (s);
+}

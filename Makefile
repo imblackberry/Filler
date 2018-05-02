@@ -12,21 +12,20 @@
 
 NAME = vblokha.filler
 
-FT_PRINTF = ft_printf
-
 SRC = main.c
 
 OBJ = ./$(SRC:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
-
-	gcc -c $(FLAGS) $(SRC) -o $(NAME)
+	make -C libft
+	gcc  -o $(NAME) $(FLAGS) libft/libft.a $(SRC)
 
 comp:
-	gcc -g $(SRC) ./ft_printf/libftprintf.a ./ft_printf/libft/libft.a
+	gcc -g $(SRC) libft/libft.a
 
 norm:
 	norminette -R CheckForbiddenSourceHeader

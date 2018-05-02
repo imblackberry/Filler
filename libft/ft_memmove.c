@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filler.h                                           :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblokha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/26 12:40:54 by vblokha           #+#    #+#             */
-/*   Updated: 2018/04/26 12:40:55 by vblokha          ###   ########.fr       */
+/*   Created: 2017/11/19 13:49:13 by vblokha           #+#    #+#             */
+/*   Updated: 2017/11/20 11:06:34 by vblokha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLER_H
-#define FILLER_H
+#include "libft.h"
 
-#include "struct.h"
-#include "functions.h"
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	char	*d;
+	char	*s;
 
-#include <stdio.h>//DEEEEEEEEEEEEEEEL
-#include "libft/libft.h"
-#include "libft/get_next_line.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <string.h>//-----
-#include <errno.h>//?????
-#include <unistd.h>//??????
-
-#endif
+	d = (char*)dst;
+	s = (char*)src;
+	if (s < d)
+		while (len--)
+			d[len] = s[len];
+	else
+		ft_memcpy(d, s, len);
+	return (d);
+}

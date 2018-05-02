@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filler.h                                           :+:      :+:    :+:   */
+/*   ft_lstaddend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblokha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/26 12:40:54 by vblokha           #+#    #+#             */
-/*   Updated: 2018/04/26 12:40:55 by vblokha          ###   ########.fr       */
+/*   Created: 2017/11/21 12:04:29 by vblokha           #+#    #+#             */
+/*   Updated: 2017/11/21 14:34:04 by vblokha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLER_H
-#define FILLER_H
+#include "libft.h"
 
-#include "struct.h"
-#include "functions.h"
+t_list	*ft_lstaddend(t_list *lst1, t_list *lst2)
+{
+	t_list *tmp;
 
-#include <stdio.h>//DEEEEEEEEEEEEEEEL
-#include "libft/libft.h"
-#include "libft/get_next_line.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <string.h>//-----
-#include <errno.h>//?????
-#include <unistd.h>//??????
-
-#endif
+	tmp = lst1;
+	while (lst1->next)
+		lst1 = lst1->next;
+	lst1->next = lst2;
+	return (tmp);
+}

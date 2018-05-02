@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filler.h                                           :+:      :+:    :+:   */
+/*   ft_countwords.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblokha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/26 12:40:54 by vblokha           #+#    #+#             */
-/*   Updated: 2018/04/26 12:40:55 by vblokha          ###   ########.fr       */
+/*   Created: 2017/11/20 15:10:18 by vblokha           #+#    #+#             */
+/*   Updated: 2017/11/20 15:17:36 by vblokha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLER_H
-#define FILLER_H
+#include "libft.h"
 
-#include "struct.h"
-#include "functions.h"
+size_t	ft_countwords(char const *s, char c)
+{
+	size_t	count;
+	size_t	status;
 
-#include <stdio.h>//DEEEEEEEEEEEEEEEL
-#include "libft/libft.h"
-#include "libft/get_next_line.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <string.h>//-----
-#include <errno.h>//?????
-#include <unistd.h>//??????
-
-#endif
+	status = 0;
+	count = 0;
+	while (*s)
+	{
+		if (*s == c)
+			status = 0;
+		else if (status == 0)
+		{
+			status = 1;
+			count++;
+		}
+		s++;
+	}
+	return (count);
+}

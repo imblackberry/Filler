@@ -13,11 +13,14 @@
 #ifndef FUNCIONS_H
 #define FUNCIONS_H
 
-#include "struct.h"
-
-int start_game();
-t_game *set_game_struct(t_game *game);
-void set_player_sign(fd, t_game **game);
-int read_map(int fd);
+void    start_game(t_game **game);
+void    set_game_struct(t_game **game);
+void    set_player_sign(t_game **game);
+void    save_file(t_game **game);
+void    free_game(t_game **game);
+void    join_free(char **s1, char *s2);
+void    free_game(t_game **game);
+void    set_map(t_game **game);
+void    set_piece(t_game **game);
 
 #endif

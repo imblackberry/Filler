@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblokha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/26 13:35:29 by vblokha           #+#    #+#             */
-/*   Updated: 2018/04/26 13:35:30 by vblokha          ###   ########.fr       */
+/*   Created: 2017/11/07 16:41:03 by vblokha           #+#    #+#             */
+/*   Updated: 2017/11/09 17:14:25 by vblokha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-#define STRUCT_H
+#include <unistd.h>
 
-typedef struct s_square
+unsigned long long int	ft_putnbr(int n)
 {
-    int size_x;
-    int size_y;
-    char **arr;
-}               t_square;
+	char					v;
+	unsigned long long int	r_len;
 
-
-typedef struct s_game
-{
-    char sign;
-    char *file;
-    char **arrfile;
-    t_square *map;
-    t_square *piece;
-}               t_game;
-
-
-
-
-#endif
+	r_len = 0;
+	if (n == -2147483648)
+	{
+		r_len = r_len + write(1, "-", 1);
+		r_len = r_len + write(1, "2", 1);
+		n = 147483648;
+	}
+	if (n < 0)
+	{
+		r_len = r_len + write(1, "-", 1);
+		n = -n;
+	}
+	if (n / 10 > 0)
+		ft_putnbr(n / 10);
+	v = n % 10 + 48;
+	r_len = r_len + write(1, &v, 1);
+	return (r_len);
+}

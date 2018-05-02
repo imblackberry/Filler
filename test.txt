@@ -1,12 +1,4 @@
-# -------------- VM  version 1.1 ------------- #
-#                                              #
-# 42 / filler VM Developped by: Hcao - Abanlin #
-#                                              #
-# -------------------------------------------- #
-launched players/carli.filler
-$$$ exec p1 : [players/carli.filler]
-launched players/champely.filler
-$$$ exec p2 : [players/champely.filler]
+$$$ exec p1 : [../Filler/vblokha.filler]
 Plateau 15 17:
     01234567890123456
 000 .................
@@ -24,6 +16,6 @@ Plateau 15 17:
 012 ..............X..
 013 .................
 014 .................
-Piece 2 3:
-*..
-***
+Piece 2 4:
+..*.
+.**.

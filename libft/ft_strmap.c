@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filler.h                                           :+:      :+:    :+:   */
+/*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblokha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/26 12:40:54 by vblokha           #+#    #+#             */
-/*   Updated: 2018/04/26 12:40:55 by vblokha          ###   ########.fr       */
+/*   Created: 2017/11/09 18:41:47 by vblokha           #+#    #+#             */
+/*   Updated: 2017/11/20 16:05:41 by vblokha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLER_H
-#define FILLER_H
+#include "libft.h"
 
-#include "struct.h"
-#include "functions.h"
+char	*ft_strmap(char const *s, char (*f)(char))
+{
+	char			*new;
+	unsigned int	i;
 
-#include <stdio.h>//DEEEEEEEEEEEEEEEL
-#include "libft/libft.h"
-#include "libft/get_next_line.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <string.h>//-----
-#include <errno.h>//?????
-#include <unistd.h>//??????
-
-#endif
+	if (!s || !f)
+		return (0);
+	i = 0;
+	while (s[i])
+		i++;
+	if (!(new = (char*)malloc(sizeof(char) * (i + 1))))
+		return (0);
+	i = 0;
+	while (s[i])
+	{
+		new[i] = f(s[i]);
+		i++;
+	}
+	new[i] = '\0';
+	return (new);
+}

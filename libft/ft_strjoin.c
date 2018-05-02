@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filler.h                                           :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblokha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/26 12:40:54 by vblokha           #+#    #+#             */
-/*   Updated: 2018/04/26 12:40:55 by vblokha          ###   ########.fr       */
+/*   Created: 2017/11/10 13:48:54 by vblokha           #+#    #+#             */
+/*   Updated: 2017/11/20 16:03:33 by vblokha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLER_H
-#define FILLER_H
+#include "libft.h"
 
-#include "struct.h"
-#include "functions.h"
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*new;
+	int		i;
+	int		j;
 
-#include <stdio.h>//DEEEEEEEEEEEEEEEL
-#include "libft/libft.h"
-#include "libft/get_next_line.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <string.h>//-----
-#include <errno.h>//?????
-#include <unistd.h>//??????
-
-#endif
+	j = 0;
+	i = 0;
+	if (!s1 || !s2 || !(new = (char*)malloc(sizeof(char) * (ft_strlen(s1) + \
+ft_strlen(s2) + 1))))
+		return (NULL);
+	while (s1[j])
+		new[i++] = s1[j++];
+	j = 0;
+	while (s2[j])
+		new[i++] = s2[j++];
+	new[i] = '\0';
+	return (new);
+}
