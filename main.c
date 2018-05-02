@@ -52,7 +52,7 @@ void start_game(t_game **game)
 {
     set_game_struct(game);
     set_game(game);
-    put_piece(game);
+    put_piece_everywhere(game);
 	showarr((*game)->piece->arr);
 	showarr((*game)->map->arr);
 
@@ -195,7 +195,7 @@ void    free_game(t_game **game)
 }
 
 
-void put_piece(t_game **game)
+void put_piece_everywhere(t_game **game)
 {
     int map_i;
     int map_j;
@@ -206,14 +206,8 @@ void put_piece(t_game **game)
         map_j = 0;
         while (map_j <= (*game)->map->size_x - (*game)->piece->size_x)
         {
-                
-
-			if ( search_valid_cases(game, map_i, map_j))
-            {
+			if (search_valid_cases(game, map_i, map_j))
                 set_valid_case(game, map_i, map_j);
-                
-            }
-//               printf("i = %d, j = %d\n", i, j);
         	map_j++;
 		}
     	map_i++;
