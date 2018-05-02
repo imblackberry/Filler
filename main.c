@@ -190,12 +190,12 @@ void    free_game(t_game **game)
 
 
 
-int check_sign(char checked_sign, char sign)
-{
-    if (checked_sign == sign || checked_sign == ft_toupper(sign))
-        return (1);
-    return (0);
-}
+// int check_sign(char checked_sign, char sign)
+// {
+//     if (checked_sign == sign || checked_sign == ft_toupper(sign))
+//         return (1);
+//     return (0);
+// }
 
 void put_piece(t_game **game)
 {
@@ -203,19 +203,16 @@ void put_piece(t_game **game)
     int j;
 
     i = j = 0;
-    while (i < (*game)->map->size_y)
+    while (i < (*game)->map->size_y - (*game)->piece->size_y)
     {
         j = 0;
-        while (j < (*game)->map->size_x)
+        while (j < (*game)->map->size_x - (*game)->piece->size_x)
         {
-           if (check_sign((*game)->map->arr[i][j], (*game)->my_sign))
-           {
-               try_to_set_case(game, i, j);
-               printf("i = %d, j = %d\n", i, j);
-           }
-            j++;
-        }
-        i++;
+			try_to_set_case(game, i, j);
+//               printf("i = %d, j = %d\n", i, j);
+        	j++;
+		}
+    	i++;
     }
 }
 
@@ -224,11 +221,34 @@ t_case    *set_case_struct()
 	t_case *valid_case;
 
 	valid_case = (valid_case*)malloc(sizeof(t_case));
-	
-
+	if (valid_case)
+	{
+		valid_case->case_x = 0;
+		valid_case->case_y = 0;
+		valid_case->next = NULL;
+	}
+	return (valid_case);
 }
 
-void    try_to_set_case(t_game **game, int i, int j)
-{
 
+
+void    try_to_set_case(t_game **game, int map_i, int map_j)
+{
+	int i;
+	int j;
+	int impositions;
+
+	i = j = impositions = 0;
+	(*game)->valid_case = set_case_struct();
+	while (i < (*game)->piece->size_y)
+	{
+		j = 0;
+		while(j < (*game)->piece->size_x)
+		{
+			if (!count_imposition((*game)->opponent_sign) && count_imposition((game)->my_sign) == 1)
+				set_valid_case();
+			j++;
+		}
+		i++;
+	}
 }
