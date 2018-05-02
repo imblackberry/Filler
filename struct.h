@@ -22,8 +22,8 @@ typedef struct s_square
 
 typedef struct s_case
 {
-    int case_x;
-    int case_y;
+    int x;
+    int y;
     struct s_case *next;
 }               t_case;
 
@@ -34,6 +34,8 @@ typedef struct s_game
     char *file;
     char **arrfile;
     t_square *map;
+    int x;
+    int y;
     t_square *piece;
     t_case *valid_case;
 }               t_game;

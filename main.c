@@ -56,6 +56,12 @@ void start_game(t_game **game)
 	showarr((*game)->piece->arr);
 	showarr((*game)->map->arr);
 
+    while ((*game)->valid_case)
+    {
+        printf("x = %d\ny = %d\n", (*game)->valid_case->x, (*game)->valid_case->y);
+        (*game)->valid_case = (*game)->valid_case->next;
+    }
+
     
 }
 
@@ -68,6 +74,8 @@ void    set_game_struct(t_game **game)
         (*game)->opponent_sign = '\0';
         (*game)->file = NULL;
         (*game)->map = NULL;
+        (*game)->x = 0;
+        (*game)->y = 0;
         (*game)->piece = NULL;
         (*game)->valid_case = NULL;
     }
@@ -187,68 +195,115 @@ void    free_game(t_game **game)
 }
 
 
-
-
-
-// int check_sign(char checked_sign, char sign)
-// {
-//     if (checked_sign == sign || checked_sign == ft_toupper(sign))
-//         return (1);
-//     return (0);
-// }
-
 void put_piece(t_game **game)
 {
-    int i;
-    int j;
+    int map_i;
+    int map_j;
 
-    i = j = 0;
-    while (i < (*game)->map->size_y - (*game)->piece->size_y)
+    map_i = map_j = 0;
+    while (map_i <= (*game)->map->size_y - (*game)->piece->size_y)
     {
-        j = 0;
-        while (j < (*game)->map->size_x - (*game)->piece->size_x)
+        map_j = 0;
+        while (map_j <= (*game)->map->size_x - (*game)->piece->size_x)
         {
-			try_to_set_case(game, i, j);
+                
+
+			if ( search_valid_cases(game, map_i, map_j))
+            {
+                set_valid_case(game, map_i, map_j);
+                
+            }
 //               printf("i = %d, j = %d\n", i, j);
-        	j++;
+        	map_j++;
 		}
-    	i++;
+    	map_i++;
     }
 }
 
-t_case    *set_case_struct()
+t_case    *set_case_struct(int y, int x)
 {
 	t_case *valid_case;
 
-	valid_case = (valid_case*)malloc(sizeof(t_case));
+	valid_case = (t_case*)malloc(sizeof(t_case));
 	if (valid_case)
 	{
-		valid_case->case_x = 0;
-		valid_case->case_y = 0;
+		valid_case->x = x;
+		valid_case->y = y;
 		valid_case->next = NULL;
 	}
 	return (valid_case);
 }
 
 
-
-void    try_to_set_case(t_game **game, int map_i, int map_j)
+int check_sign(t_game *game, char map_sign, char piece_sign)
 {
-	int i;
-	int j;
-	int impositions;
+    // if (piece_sign == '.' && map_sign == '.')
+    //     return (0);
+    // else if (piece_sign == '.' && map_sign == game->my_sign)
+    //     return (0);
+    // else if (piece_sign == '.' && map_sign == game->opponent_sign)
+    //     return (0);
+    // else if (piece_sign == '*' && map_sign == '.')
+    //     return (0);
+    // else 
+    if (piece_sign == '*' && (map_sign == game->my_sign || map_sign == ft_toupper(game->my_sign)))
+        return (1);
+    else if (piece_sign == '*' && (map_sign == game->opponent_sign || map_sign == ft_toupper(game->opponent_sign)))
+        return (-1);
+    return (0);
+}
+// p m
+// . . + 0
+// . o + 0
+// . x + 0
+// * . + 0
+// * o (only one case must be) 1
+// * x (no) -1
+void set_valid_case(t_game **game, int map_i, int map_j)
+{
+    t_case *new_case;
+    t_case *tmp;
 
-	i = j = impositions = 0;
-	(*game)->valid_case = set_case_struct();
-	while (i < (*game)->piece->size_y)
+    new_case = set_case_struct(map_i, map_j);
+    //printf ("HERE\n");
+    if (!(*game)->valid_case)
+        (*game)->valid_case = new_case;
+    else
+    {
+        tmp = (*game)->valid_case;
+        while (tmp->next)
+            tmp = tmp->next;
+         tmp->next = new_case;
+    }
+}
+
+int search_valid_cases(t_game **game, int map_i, int map_j)
+{
+    int i;
+	int j;
+	int opp_imposition;
+    int my_imposition;
+
+    i = j = opp_imposition = my_imposition = 0;
+    while (i < (*game)->piece->size_y)
 	{
+        map_j -= j;
 		j = 0;
 		while(j < (*game)->piece->size_x)
 		{
-			if (!count_imposition((*game)->opponent_sign) && count_imposition((game)->my_sign) == 1)
-				set_valid_case();
+			if (check_sign(*game, (*game)->map->arr[map_i][map_j], (*game)->piece->arr[i][j]) == 1)
+				my_imposition++;
+            else if (check_sign(*game, (*game)->map->arr[map_i][map_j], (*game)->piece->arr[i][j]) == -1)
+                opp_imposition++;
 			j++;
+            map_j++;
 		}
 		i++;
+        map_i++;
 	}
+    if (my_imposition == 1 && opp_imposition == 0)
+        return (1);
+    return (0);
 }
+/* ************************************************************************** */
+

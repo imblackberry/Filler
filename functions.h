@@ -24,5 +24,8 @@ void    set_map(t_game **game);
 void    set_piece(t_game **game);
 void    set_opponent_sign(t_game **game);
 void    try_to_set_case(t_game **game, int i, int j);
+void put_piece(t_game **game);
+int search_valid_cases(t_game **game, int map_i, int map_j);
+void set_valid_case(t_game **game, int map_i, int map_j);
 
 #endif
