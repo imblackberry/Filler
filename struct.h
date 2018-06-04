@@ -24,6 +24,7 @@ typedef struct s_case
 {
     int x;
     int y;
+	int distance;
     struct s_case *next;
 }               t_case;
 
@@ -33,6 +34,7 @@ typedef struct s_game
     char opponent_sign;
     char *file;
     char **arrfile;
+	int **distance_map;
     t_square *map;
     int x;
     int y;

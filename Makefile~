@@ -6,13 +6,13 @@
 #    By: vblokha <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/20 11:21:20 by vblokha           #+#    #+#              #
-#    Updated: 2018/06/04 15:31:42 by vblokha          ###   ########.fr        #
+#    Updated: 2018/04/20 11:21:23 by vblokha          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = vblokha.filler
 
-SRC = main.c search_one_xy_case.c
+SRC = main.c
 
 OBJ = ./$(SRC:.c=.o)
 

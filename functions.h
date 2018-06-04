@@ -27,5 +27,8 @@ void    try_to_set_case(t_game **game, int i, int j);
 void put_piece_everywhere(t_game **game);
 int search_valid_cases(t_game **game, int map_i, int map_j);
 void set_valid_case(t_game **game, int map_i, int map_j);
-
+void	search_one_xy_case(t_game **game);
+int		**fill_distance(t_game **game);
+int		search_minimum_distance(t_case	*valid_case);
+void	set_result(t_game **game, t_case *result);
 #endif

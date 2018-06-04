@@ -53,16 +53,15 @@ void start_game(t_game **game)
     set_game_struct(game);
     set_game(game);
     put_piece_everywhere(game);
-	showarr((*game)->piece->arr);
-	showarr((*game)->map->arr);
-
     while ((*game)->valid_case)
     {
         printf("x = %d\ny = %d\n", (*game)->valid_case->x, (*game)->valid_case->y);
         (*game)->valid_case = (*game)->valid_case->next;
-    }
+    }	
+	search_one_xy_case(game);
+	showarr((*game)->piece->arr);
+	showarr((*game)->map->arr);
 
-    
 }
 
 void    set_game_struct(t_game **game)
@@ -73,6 +72,8 @@ void    set_game_struct(t_game **game)
         (*game)->my_sign = '\0';
         (*game)->opponent_sign = '\0';
         (*game)->file = NULL;
+		(*game)->arrfile = NULL;
+		(*game)->distance_map = NULL;
         (*game)->map = NULL;
         (*game)->x = 0;
         (*game)->y = 0;
@@ -223,6 +224,7 @@ t_case    *set_case_struct(int y, int x)
 	{
 		valid_case->x = x;
 		valid_case->y = y;
+		valid_case->distance = 0;
 		valid_case->next = NULL;
 	}
 	return (valid_case);

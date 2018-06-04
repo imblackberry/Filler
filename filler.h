@@ -25,5 +25,6 @@
 #include <string.h>//-----
 #include <errno.h>//?????
 #include <unistd.h>//??????
+#define NEW 3
 
 #endif
