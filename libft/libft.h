@@ -106,5 +106,6 @@ unsigned long long	ft_putnbr_u(unsigned long long int n);
 unsigned long long	ft_putstrlen(char *str, int len);
 int					ft_s_num_width(long long int n, int div);
 int					ft_u_num_width(unsigned long long int n, int div);
-void ft_free_double_arr(char ***arr);
+void				ft_free_double_arr(char ***arr);
+int					compare_to_upper_and_low(char c, char lower_virsion);
 #endif

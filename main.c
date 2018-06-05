@@ -12,6 +12,11 @@
 
 #include "filler.h"
 
+int	compare_to_upper_and_low(char c, char lower_virsion)
+{
+	return (c == lower_virsion || c == ft_toupper(lower_virsion));
+}
+
 int main()
 {
     t_game *game;
@@ -22,6 +27,7 @@ int main()
     
     free_game(&game);
   // system("leaks a.out");
+
     return (0);
 
 }
@@ -57,7 +63,7 @@ void start_game(t_game **game)
     {
         printf("x = %d\ny = %d\n", (*game)->valid_case->x, (*game)->valid_case->y);
         (*game)->valid_case = (*game)->valid_case->next;
-    }	
+    }
 	search_one_xy_case(game);
 	showarr((*game)->piece->arr);
 	showarr((*game)->map->arr);
@@ -230,7 +236,6 @@ t_case    *set_case_struct(int y, int x)
 	return (valid_case);
 }
 
-
 int check_sign(t_game *game, char map_sign, char piece_sign)
 {
     // if (piece_sign == '.' && map_sign == '.')
@@ -242,9 +247,9 @@ int check_sign(t_game *game, char map_sign, char piece_sign)
     // else if (piece_sign == '*' && map_sign == '.')
     //     return (0);
     // else 
-    if (piece_sign == '*' && (map_sign == game->my_sign || map_sign == ft_toupper(game->my_sign)))
+    if (piece_sign == '*' && (compare_to_upper_and_low(map_sign, game->my_sign)))
         return (1);
-    else if (piece_sign == '*' && (map_sign == game->opponent_sign || map_sign == ft_toupper(game->opponent_sign)))
+    else if (piece_sign == '*' && (compare_to_upper_and_low(map_sign, game->opponent_sign)))
         return (-1);
     return (0);
 }
