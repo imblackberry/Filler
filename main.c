@@ -12,10 +12,6 @@
 
 #include "filler.h"
 
-int	compare_to_upper_and_low(char c, char lower_virsion)
-{
-	return (c == lower_virsion || c == ft_toupper(lower_virsion));
-}
 
 int main()
 {
@@ -59,14 +55,15 @@ void start_game(t_game **game)
     set_game_struct(game);
     set_game(game);
     put_piece_everywhere(game);
-    while ((*game)->valid_case)
-    {
-        printf("x = %d\ny = %d\n", (*game)->valid_case->x, (*game)->valid_case->y);
-        (*game)->valid_case = (*game)->valid_case->next;
-    }
+    // while ((*game)->valid_case)
+    // {
+    //     printf("x = %d\ny = %d\n", (*game)->valid_case->x, (*game)->valid_case->y);
+    //     (*game)->valid_case = (*game)->valid_case->next;
+    // }
 	search_one_xy_case(game);
 	showarr((*game)->piece->arr);
 	showarr((*game)->map->arr);
+	printf("%d %d\n", (*game)->x, (*game)->y);
 
 }
 

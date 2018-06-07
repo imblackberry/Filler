@@ -30,7 +30,6 @@ void	set_valid_case(t_game **game, int map_i, int map_j);
 void	search_one_xy_case(t_game **game);
 int		**fill_distance(t_game **game);
 int		search_minimum_distance(t_case	*valid_case);
-void	set_result(t_game **game, t_case *result);
 void	search_one_xy_case(t_game **game);
 void	set_distance_map(t_game **game);
 int **new_two_d_int_array(int x, int y);
