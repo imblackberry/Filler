@@ -19,8 +19,7 @@ int main()
 
     game = NULL;
     start_game(&game);
-//    if_error();
-    
+
     free_game(&game);
   // system("leaks a.out");
 
@@ -35,36 +34,103 @@ void    showarr(char **arr)
     i = 0;
     while (arr[i])
     {
-        printf("[%d] =\t|%s|\n", i, arr[i]);
+        fprintf(stderr, "\t\t\t\t\t\t\t\t\t\t\t\t[%d] =\t|%s|\n", i, arr[i]);
         i++;
     }
 }
 
-void    set_game(t_game **game)
+int    set_game(t_game **game)
 {
-    save_file(game);
-    (*game)->arrfile = ft_strsplit((*game)->file, '\n');
-    set_player_sign(game);
-    set_opponent_sign(game);
+	int ret;
+
+	ret = 0;
+    if (save_file(game) < 0)
+		ret = -1;  
+    (*game)->arrfile = ft_strsplit((*game)->file, '\n');    
     set_map(game);
     set_piece(game);
+	return (ret);
+}
+
+void    free_square(t_square **square)
+{
+	if (*square || square)
+	{
+    	ft_free_char_double_arr(&(*square)->arr);
+    	(*square)->arr = 0;
+    	free(*square);
+    	*square = NULL;
+	}
+}
+void	ft_free_case(t_case **valid_case)
+{
+	t_case *tmp;
+
+	tmp = NULL;
+	while (tmp)
+	{
+		tmp = (*valid_case)->next;
+		free(*valid_case);
+		*valid_case = NULL;
+		*valid_case = tmp;
+	}
+}
+void ft_free_int_double_arr(int ***arr, int size_y)
+{
+	int i;
+
+	i = 0;
+	while (i < size_y)
+	{
+	 	free(arr[0][i]);
+		i++;
+	}
+	arr[0] = NULL;
+}
+
+void	free_game_my_turn(t_game **game)
+{
+	t_square *map;
+
+	map = (*game)->map;
+	ft_strdel(&(*game)->file);
+    ft_free_char_double_arr(&(*game)->arrfile);
+
+	// showarr((*game)->map->arr);
+
+    // free_square(&(*game)->map);
+    free_square(&(*game)->piece);
+	ft_free_int_double_arr(&(*game)->distance_map, map->size_y);//DO!
+	ft_free_case(&(*game)->valid_case);//DO
+	(*game)->valid_case = NULL;
+	(*game)->x = 0;
+    (*game)->y = 0;
 }
 
 void start_game(t_game **game)
 {
     set_game_struct(game);
-    set_game(game);
-    put_piece_everywhere(game);
-    // while ((*game)->valid_case)
-    // {
-    //     printf("x = %d\ny = %d\n", (*game)->valid_case->x, (*game)->valid_case->y);
-    //     (*game)->valid_case = (*game)->valid_case->next;
-    // }
-	search_one_xy_case(game);
-	showarr((*game)->piece->arr);
-	showarr((*game)->map->arr);
-	printf("%d %d\n", (*game)->x, (*game)->y);
-
+	set_player_sign(game);
+    set_opponent_sign(game);
+	while(1)
+	{
+		if (set_game(game) < 0)
+			break ;
+		if ((put_piece_everywhere(game)) < 0)
+			break ;
+		search_one_xy_case(game);
+		ft_putnbr((*game)->y);
+		ft_putchar(' ');
+		ft_putnbr((*game)->x);
+		ft_putchar('\n');
+		free_game_my_turn(game);
+	}
+		// free_game_my_turn(game);
+		// ft_putnbr((*game)->y);
+		// ft_putchar(' ');
+		// ft_putnbr((*game)->x);
+		// ft_putchar('\n');
+	// free_game_my_turn(game);
 }
 
 void    set_game_struct(t_game **game)
@@ -78,10 +144,10 @@ void    set_game_struct(t_game **game)
 		(*game)->arrfile = NULL;
 		(*game)->distance_map = NULL;
         (*game)->map = NULL;
-        (*game)->x = 0;
-        (*game)->y = 0;
         (*game)->piece = NULL;
         (*game)->valid_case = NULL;
+        (*game)->x = 0;
+        (*game)->y = 0;
     }
 }
 
@@ -95,10 +161,15 @@ void    set_opponent_sign(t_game **game)
 
 void    set_player_sign(t_game **game)
 {
-    if ((*game)->arrfile[0][10] == '1')
+	char *line;
+
+	line = NULL;
+	get_next_line(0, &line);
+    if (line[10] == '1')
         (*game)->my_sign = 'o';
-    else if ((*game)->arrfile[0][10]== '2')
+    else if (line[10] == '2')
         (*game)->my_sign = 'x';
+	ft_strdel(&line);
 }
 
 void    set_square_arr(char **arrfile, t_square **square, int start_x)
@@ -106,7 +177,7 @@ void    set_square_arr(char **arrfile, t_square **square, int start_x)
     int i;
 
     i = 0;
-    (*square)->arr = (char**)malloc(sizeof(char*) * (*square)->size_y + 1);
+    (*square)->arr = (char**)malloc(sizeof(char*) * ((*square)->size_y + 1));
     while (i < (*square)->size_y)
     {
         (*square)->arr[i] = ft_strsub(*(arrfile + i), start_x, (*square)->size_x);
@@ -133,17 +204,17 @@ void    set_square_size(t_square **square, char *size_str, int start_digital)
 void    set_map(t_game **game)
 {
     (*game)->map = (t_square*)malloc(sizeof(t_square));
-    set_square_size(&(*game)->map, (*game)->arrfile[1], 8);
-    set_square_arr((*game)->arrfile + 3, &(*game)->map, 4);
+    set_square_size(&(*game)->map, (*game)->arrfile[0], PLATEAU + 1);
+    set_square_arr((*game)->arrfile + START_MAP_Y, &(*game)->map, START_MAP_X);
 }
 
 void    set_piece(t_game **game)
 {
     int i;
 
-    i = 3 + (*game)->map->size_y;
+    i = START_MAP_Y + (*game)->map->size_y;
     (*game)->piece = (t_square*)malloc(sizeof(t_square));
-    set_square_size(&(*game)->piece, (*game)->arrfile[i], 6);
+    set_square_size(&(*game)->piece, (*game)->arrfile[i], PIECE + 1);
     set_square_arr((*game)->arrfile + i + 1, &(*game)->piece, 0);
 }
 /* ************************************************************************** */
@@ -157,49 +228,53 @@ void    join_free(char **s1, char *s2)
     ft_strdel(&save);
 }
 
-void    save_file(t_game **game)
+int    save_file(t_game **game)
 {
-    int gnl;
     char *line;
-    int fd;//get out
+    int fd;//DELL
     char *newline;
+	int i;
+	int to_end;
+	
+	to_end = 0;
+	i = 0;
+	fd = 0;
+	// line = NULL;
+    // fd = open("test.txt", O_RDONLY);
 
-    fd = open("test.txt", O_RDONLY);
     newline = ft_strdup("\n");
-    while((gnl = get_next_line(fd, &line)))
-    {     
+    while (i < to_end || !to_end)
+    {   
+		if (get_next_line(fd, &line) < 0)
+			return (-1);
+		if (ft_strstr(line, "Piece"))
+			to_end = ft_atoi(line + PIECE);
+		else if (to_end)
+			i++;
+		// printf("To_end = %d\n", to_end);
         if (!(*game)->file)
             (*game)->file = ft_strdup(line);
         else
             join_free(&(*game)->file, line);
-        join_free(&(*game)->file, newline);
+		join_free(&(*game)->file, newline);
         ft_strdel(&line);
     }
     ft_strdel(&newline);
     ft_strdel(&line);
+	return (1);
+	// printf("FILE %s \n", (*game)->file) ;
 }
 
-void    free_square(t_square **square)
-{
-    ft_free_double_arr(&(*square)->arr);
-    (*square)->arr = 0;
-    free(*square);
-    *square = NULL;
-}
+
 
 void    free_game(t_game **game)
 {
-    ft_strdel(&(*game)->file);
-    (*game)->file = NULL;
-    ft_free_double_arr(&(*game)->arrfile);
-    free_square(&(*game)->map);
-    free_square(&(*game)->piece);
     free(*game);
     *game = NULL;
 }
 
 
-void put_piece_everywhere(t_game **game)
+int put_piece_everywhere(t_game **game)
 {
     int map_i;
     int map_j;
@@ -216,6 +291,9 @@ void put_piece_everywhere(t_game **game)
 		}
     	map_i++;
     }
+	if (!(*game)->valid_case)
+		return (-1);
+	return (0);
 }
 
 t_case    *set_case_struct(int y, int x)

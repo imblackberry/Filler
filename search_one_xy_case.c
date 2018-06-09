@@ -22,14 +22,14 @@ void    show_double_int_arr(int **arr, int size_x, int size_y)
     while (i < size_y)
     {
 		j = 0;
-		printf("[%d]\t", i);
+		fprintf(stderr, "[%d]\t", i);
 		while(j < size_x)
 		{
-			printf("|%d|", arr[i][j]);
-			printf("\t");
+			fprintf(stderr, "|%d|", arr[i][j]);
+			fprintf(stderr,"\t");
 			j++;
 		}
-        printf("\n");
+        fprintf(stderr,"\n");
         i++;
     }
 }
@@ -118,7 +118,7 @@ void	set_distance_map(t_game **game)
 
 int	point_exist_in_map(t_square *map, int i, int j)
 {
-	return (i >= 0 && j >= 0 && i < map->size_y && j < map->size_x);
+	return (i >= 0 && i < map->size_y && j >= 0 && j < map->size_x);
 }
 
 void	surround_the_point(t_square *map, int ***distance_map, int y, int x)
@@ -136,10 +136,8 @@ void	surround_the_point(t_square *map, int ***distance_map, int y, int x)
 		j = -1;
 		while(j < 2)
 		{
-			if (point_exist_in_map(map, y + i, y + j) && distance_map[0][y + i][x + j] == -1)
-			{
+			if (point_exist_in_map(map, y + i, x + j) && distance_map[0][y + i][x + j] == -1)
 				distance_map[0][y + i][x + j] = by_it;
-			}
 			j++;
 		}
 		i++;
@@ -161,7 +159,12 @@ void	search_surrounding_point(t_game **game, int surround_it)
 		while(j < map->size_x)
 		{
 			if (distance_map[i][j] == surround_it)
+			{
+				// if (surround_it == 0)
+					
 				surround_the_point(map, &distance_map, i, j);
+
+			}
 			j++;
 		}
 		i++;
@@ -202,7 +205,6 @@ void	set_each_distance(t_game **game)
 		search_surrounding_point(game, surround_it);
 		surround_it++;
 	}
-	show_double_int_arr(distance_map, map->size_x, map->size_y);
 }
 
 int **new_two_d_int_array(int size_x, int size_y)//****************malloc

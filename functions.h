@@ -16,7 +16,7 @@
 void    start_game(t_game **game);
 void    set_game_struct(t_game **game);
 void    set_player_sign(t_game **game);
-void    save_file(t_game **game);
+int    save_file(t_game **game);
 void    free_game(t_game **game);
 void    join_free(char **s1, char *s2);
 void    free_game(t_game **game);
@@ -24,7 +24,7 @@ void    set_map(t_game **game);
 void    set_piece(t_game **game);
 void    set_opponent_sign(t_game **game);
 void    try_to_set_case(t_game **game, int i, int j);
-void	put_piece_everywhere(t_game **game);
+int		put_piece_everywhere(t_game **game);
 int		search_valid_cases(t_game **game, int map_i, int map_j);
 void	set_valid_case(t_game **game, int map_i, int map_j);
 void	search_one_xy_case(t_game **game);
