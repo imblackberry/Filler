@@ -36,10 +36,10 @@ typedef struct s_game
     char **arrfile;
 	int **distance_map;
     t_square *map;
-    int x;
-    int y;
     t_square *piece;
     t_case *valid_case;
+	int x;
+    int y;
 }               t_game;
 
 

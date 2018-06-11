@@ -12,7 +12,7 @@
 
 NAME = vblokha.filler
 
-SRC = main.c search_one_xy_case.c
+SRC = start_game.c turn.c case.c distance.c free_game.c point.c save_file.c set_map_and_piece.c
 
 OBJ = ./$(SRC:.c=.o)
 

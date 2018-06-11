@@ -25,7 +25,8 @@ ft_itoa.c	ft_putchar_fd.c	ft_strcmp.c	ft_strmap.c	ft_strstr.c \
 ft_lstnew.c ft_lstdelone.c ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_lstdel.c\
 ft_countwords.c ft_lstdisplay.c ft_del.c ft_lstaddend.c ft_count_if.c ft_itoa_base.c\
 ft_strtoupper.c ft_putnbr_s.c ft_putnbr_u.c ft_putstrlen.c ft_s_num_width.c ft_u_num_width.c\
-get_next_line.c ft_free_char_double_arr.c compare_to_upper_and_low.c
+get_next_line.c ft_free_char_double_arr.c compare_to_upper_and_low.c ft_join_free.c \
+ft_free_int_double_arr.c ft_new_double_int_arr.c
 
 OBJ = ./ft_atoi.o	ft_memccpy.o	ft_strchr.o	ft_strncmp.o\
 ft_bzero.o	ft_memchr.o	ft_strcmp.o	ft_strncpy.o\
@@ -43,7 +44,8 @@ ft_putendl.o	ft_strclr.o	ft_strmap.o	ft_strtrim.o \
 ft_lstnew.o ft_lstdelone.o ft_lstadd.o ft_lstiter.o ft_lstmap.o ft_lstdel.o\
 ft_countwords.o ft_lstdisplay.o ft_del.o ft_lstaddend.o ft_count_if.o ft_itoa_base.o\
 ft_strtoupper.o ft_putnbr_s.o ft_putnbr_u.o ft_putstrlen.o ft_s_num_width.o ft_u_num_width.o\
-get_next_line.o ft_free_char_double_arr.o compare_to_upper_and_low.o
+get_next_line.o ft_free_char_double_arr.o compare_to_upper_and_low.o ft_join_free.o\
+ft_free_int_double_arr.o ft_new_double_int_arr.o
 all: $(NAME)
 
 $(NAME): $(SRCS) ./includes/libft.h

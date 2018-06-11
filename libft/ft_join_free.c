@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_char_double_arr.c                          :+:      :+:    :+:   */
+/*   ft_join_free.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblokha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/11 17:20:07 by vblokha           #+#    #+#             */
-/*   Updated: 2018/06/11 17:20:12 by vblokha          ###   ########.fr       */
+/*   Created: 2018/06/11 17:13:49 by vblokha           #+#    #+#             */
+/*   Updated: 2018/06/11 17:14:38 by vblokha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void    ft_free_char_double_arr(char ***arr)
+void    ft_join_free(char **s1, char *s2)
 {
-	int i;
+	char *save;
 
-	i = 0;
-    if (!arr || !*arr)
-        return ;
-	while (arr[0][i])
-	{
-		ft_strdel(&arr[0][i]);
-		i++;
-	}
-	free(arr[0]);
-	arr[0] = NULL;
+	save = *s1;
+	*s1 = ft_strjoin(*s1, s2);
+	ft_strdel(&save);
 }
