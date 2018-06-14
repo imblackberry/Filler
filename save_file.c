@@ -49,7 +49,7 @@ int		save_file(t_game **game)
 	newline = ft_strdup("\n");
 	while (i < to_end || !to_end)
 	{
-		if ((ret = read_to_end(&line, &to_end, &i)) < 0)
+		if ((ret = read_to_end(&line, &to_end, &i)) <= 0)
 			break ;
 		if (!(*game)->file)
 			(*game)->file = ft_strdup(line);

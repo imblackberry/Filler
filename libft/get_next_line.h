@@ -16,7 +16,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include "libft.h"
-# define BUFF_SIZE 66
+# define BUFF_SIZE 1
 
 typedef	struct		s_mylst
 {

@@ -15,7 +15,6 @@
 int		main(void)
 {
 	t_game *game;
-	fprintf(stderr, "\n\n\n\n\n\nBefore 1 gnl\n");
 	game = NULL;
 	start_game(&game);
 	free_game(&game);
@@ -70,7 +69,6 @@ void	set_player_sign(t_game **game)
 	char *line;
 
 	line = NULL;
-	fprintf(stderr, "Before 1 gnl\n");
 	get_next_line(0, &line);
 	if (line[10] == '1')
 		(*game)->my_sign = 'O';

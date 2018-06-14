@@ -70,7 +70,7 @@ int				get_next_line(const int fd, char **line)
 		return (-1);
 	head = lst;
 	ft_lstaddfirst(&head, fd, &lst);
-	while ((p.ret = read(fd, buf, BUFF_SIZE)))
+	while ((p.ret = read(fd, buf, BUFF_SIZE)) && p.ret == BUFF_SIZE)
 	{
 		buf[p.ret] = '\0';
 		p.str = head->content;
@@ -79,6 +79,7 @@ int				get_next_line(const int fd, char **line)
 		p.str = NULL;
 		if (ft_strchr(head->content, '\n'))
 			break ;
+		// write(2, "here", 4);//DEL
 	}
 	*line = ft_strsub(head->content, 0, ft_line_size(head->content));
 	p.k = ft_strlen(head->content) == 0 ? 1 : 0;
