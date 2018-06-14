@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_new_double_int_arr.c                            :+:      :+:    :+:   */
+/*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblokha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/11 17:30:29 by vblokha           #+#    #+#             */
-/*   Updated: 2018/06/11 17:34:32 by vblokha          ###   ########.fr       */
+/*   Created: 2018/06/14 15:10:50 by vblokha           #+#    #+#             */
+/*   Updated: 2018/06/14 15:10:51 by vblokha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int **ft_new_double_int_arr(int size_x, int size_y)
-{
-	int **new;
-	int i;
-	int j;
+#include "libft/libft.h"
+#include "libft/get_next_line.h"
 
-	i = 0;
-	j = 0;
-	new = (int**)malloc(sizeof(int*) * size_y);
-	while (i < size_y)
-	{
-		j = 0;
-		new[i] = (int*)malloc(sizeof(int) * size_x);
-		while (j < size_x)
-		{
-			new[i][j] = -1;
-			j++;
-		}
-		i++;
-	}
-	return (new);
+int main()
+{
+	char *line;
+	int fd;
+
+	line = NULL;
+	fd = open("test.txt", O_RDONLY);
+	get_next_line(fd, &line);
+	ft_putstr(line);
+	ft_putstr("\n");
+	free(line);
+	line = NULL;
+	get_next_line(fd, &line);
+	ft_putstr(line);
+	ft_putstr("\n");
+	free(line);
+	line = NULL;
+	return (0);
 }

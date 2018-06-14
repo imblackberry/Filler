@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblokha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/11 17:17:09 by vblokha           #+#    #+#             */
-/*   Updated: 2018/06/11 17:17:10 by vblokha          ###   ########.fr       */
+/*   Created: 2018/06/12 19:48:34 by vblokha           #+#    #+#             */
+/*   Updated: 2018/06/12 19:48:37 by vblokha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_free_int_double_arr(int ***arr, int size_y)
 	if (*arr != NULL)
 		return ;
 	while (i < size_y)
-	 	free(arr[0][i++]);
+		free(arr[0][i++]);
 	free(arr[0]);
 	arr[0] = NULL;
 }

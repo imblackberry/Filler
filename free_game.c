@@ -12,16 +12,16 @@
 
 #include "filler.h"
 
-void    free_square(t_square **square)
+void	free_square(t_square **square)
 {
 	if (!square || !*square)
-        return ;
-    ft_free_char_double_arr(&(*square)->arr);
+		return ;
+	ft_free_char_double_arr(&(*square)->arr);
 	(*square)->arr = NULL;
-    (*square)->size_x = 0;
-    (*square)->size_y = 0;
-    free(*square);
-    (*square) = NULL;
+	(*square)->size_x = 0;
+	(*square)->size_y = 0;
+	free(*square);
+	(*square) = NULL;
 }
 
 void	free_case(t_case **valid_case)
@@ -39,26 +39,24 @@ void	free_case(t_case **valid_case)
 	}
 }
 
-void    free_game(t_game **game)
+void	free_game(t_game **game)
 {
-    free(*game);
-    *game = NULL;
+	free(*game);
+	*game = NULL;
 }
 
 void	free_game_my_turn(t_game **game)
 {
 	t_square *map;
 
-    // if (!(*game)->file || !(*game)->map || !(*game)->piece)
-    //     return ;
 	map = (*game)->map;
 	ft_strdel(&(*game)->file);
-    ft_free_char_double_arr(&(*game)->arrfile);
+	ft_free_char_double_arr(&(*game)->arrfile);
 	if ((*game)->map && (*game)->map->size_x && (*game)->map->size_y)
 		ft_free_int_double_arr(&(*game)->distance_map, map->size_y);
-    free_square(&(*game)->map);
-    free_square(&(*game)->piece);
-	free_case(&(*game)->valid_case);//DO
+	free_square(&(*game)->map);
+	free_square(&(*game)->piece);
+	free_case(&(*game)->valid_case);
 	(*game)->x = 0;
-    (*game)->y = 0;
+	(*game)->y = 0;
 }

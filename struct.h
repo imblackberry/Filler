@@ -11,38 +11,35 @@
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
-#define STRUCT_H
+# define STRUCT_H
 
-typedef struct s_square
+typedef struct		s_square
 {
-    int size_x;
-    int size_y;
-    char **arr;
-}               t_square;
+	int		size_x;
+	int		size_y;
+	char	**arr;
+}					t_square;
 
-typedef struct s_case
+typedef struct		s_case
 {
-    int x;
-    int y;
-	int distance;
-    struct s_case *next;
-}               t_case;
+	int				x;
+	int				y;
+	int				distance;
+	struct s_case	*next;
+}					t_case;
 
-typedef struct s_game
+typedef struct		s_game
 {
-    char my_sign;
-    char opponent_sign;
-    char *file;
-    char **arrfile;
-	int **distance_map;
-    t_square *map;
-    t_square *piece;
-    t_case *valid_case;
-	int x;
-    int y;
-}               t_game;
-
-
-
+	char		my_sign;
+	char		opponent_sign;
+	char		*file;
+	char		**arrfile;
+	int			**distance_map;
+	t_square	*map;
+	t_square	*piece;
+	t_case		*valid_case;
+	int			x;
+	int			y;
+}					t_game;
 
 #endif

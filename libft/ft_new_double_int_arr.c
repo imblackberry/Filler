@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int **ft_new_double_int_arr(int size_x, int size_y)
+int	**ft_new_double_int_arr(int size_x, int size_y)
 {
 	int **new;
 	int i;

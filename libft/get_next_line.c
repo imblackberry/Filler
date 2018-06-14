@@ -1,87 +1,89 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vblokha <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/12/07 16:33:14 by vblokha           #+#    #+#             */
+/*   Updated: 2017/12/07 16:33:19 by vblokha          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-static t_file *new_file(int fd)
+int				ft_line_size(char *str)
 {
-  t_file *file;
+	int i;
 
-  file = (t_file*)malloc(sizeof(t_file));
-  if (!file)
-    return (NULL);
-  file->fd = fd;
-  file->buf = ft_strnew(BUFF_SIZE);
-  if (!file->buf)
-    {
-      free(file);
-      return (NULL);
-    }
-  file->next = NULL;
-  return (file);
+	i = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	return (i);
 }
 
-static int save_line(char *buf, char **line)
+void			ft_lstaddfirst(t_mylst **head, int fd, t_mylst **lst)
 {
-  unsigned int i;
-  char *trash;
-  char *line_part;
+	t_mylst *first;
 
-  i = 0;
-  while (buf[i] && buf[i] != '\n')
-    i++;
-  trash = *line;
-  if (!(line_part = ft_strnew(i)))
-    {
-      free(trash);
-      return (-1);
-    }
-  line_part = ft_strncpy(line_part, buf, i);
-  *line = ft_strjoin(*line, line_part);
-  free(trash);
-  free(line_part);
-  return (buf[i] == '\n');
+	while ((*head) && (*head)->fd != fd)
+		(*head) = (*head)->next;
+	if ((*head) == NULL)
+	{
+		first = (t_mylst*)malloc(sizeof(t_mylst));
+		first->content = ft_strdup("");
+		first->fd = fd;
+		first->next = NULL;
+		if ((*lst) == NULL)
+			(*lst) = first;
+		else
+		{
+			first->next = (*lst);
+			(*lst) = first;
+		}
+		(*head) = *lst;
+	}
 }
 
-static t_file*get_file(t_file **head, int fd)
+void			ft_tail(t_struct p, t_mylst **head)
 {
-  t_file *target;
-
-  if (!*head && !(*head = new_file(fd)))
-    return (NULL);
-  target = *head;
-  while (target->next && target->fd != fd)
-    target = target->next;
-  if (target->fd != fd)
-    {
-      target->next = new_file(fd);
-      if (!(target = target->next))
-	return (NULL);
-    }
-  return (target);
+	if (p.k == 0)
+	{
+		p.str = (*head)->content;
+		if (ft_strchr((*head)->content, '\n') != 0)
+			(*head)->content = ft_strdup(ft_strchr((*head)->content, '\n') + 1);
+		else
+			(*head)->content = ft_strdup("");
+		free(p.str);
+		p.str = NULL;
+	}
 }
 
-int get_next_line(const int fd, char **line)
+int				get_next_line(const int fd, char **line)
 {
-  static t_file *head;
-  t_file *cur;
-  int rd_flag;
-  int sv_flag;
-  char *tmp;
+	char			buf[BUFF_SIZE + 1];
+	static t_mylst	*lst = NULL;
+	t_mylst			*head;
+	t_struct		p;
 
-  if (!line || !(*line = ft_strnew(1)))
-    return (-1);
-  if (!(cur = get_file(&head, fd)))
-    return (-1);
-  rd_flag = 1;
-  while (!(sv_flag = save_line(cur->buf, line)) && rd_flag)
-    {
-      ft_strclr(cur->buf);
-      rd_flag = read(fd, cur->buf, BUFF_SIZE);
-      if (rd_flag == -1 || sv_flag == -1)
-	return (-1);
-    }
-  if ((tmp = ft_strchr(cur->buf, '\n')))
-    {
-      ft_memmove(cur->buf, tmp + 1, ft_strlen(tmp + 1));
-      ft_strclr(cur->buf + ft_strlen(tmp + 1));
-    }
-  return (rd_flag || sv_flag || ft_strlen(*line) ? 1 : 0);
+	if (fd < 0 || line == NULL || read(fd, buf, 0) < 0 || BUFF_SIZE < 0)
+		return (-1);
+	head = lst;
+	ft_lstaddfirst(&head, fd, &lst);
+	while ((p.ret = read(fd, buf, BUFF_SIZE)))
+	{
+		buf[p.ret] = '\0';
+		p.str = head->content;
+		head->content = ft_strjoin(head->content, buf);
+		free(p.str);
+		p.str = NULL;
+		if (ft_strchr(head->content, '\n'))
+			break ;
+	}
+	*line = ft_strsub(head->content, 0, ft_line_size(head->content));
+	p.k = ft_strlen(head->content) == 0 ? 1 : 0;
+	ft_tail(p, &head);
+	if (p.ret == 0 && p.k == 1)
+		return (0);
+	return (1);
 }

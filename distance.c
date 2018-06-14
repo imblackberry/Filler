@@ -12,13 +12,12 @@
 
 #include "filler.h"
 
-
 void	set_valid_case_distance(t_game *game)
 {
-	t_case *valid_case;
-	int i_map;
-	int j_map;
-	
+	t_case	*valid_case;
+	int		i_map;
+	int		j_map;
+
 	valid_case = game->valid_case;
 	while (valid_case)
 	{
@@ -31,9 +30,9 @@ void	set_valid_case_distance(t_game *game)
 
 void	set_each_distance(t_game **game)
 {
-	int surround_it;
-	int **distance_map;
-	t_square *map;
+	int			surround_it;
+	int			**distance_map;
+	t_square	*map;
 
 	map = (*game)->map;
 	distance_map = (*game)->distance_map;
@@ -64,8 +63,7 @@ void	set_opponent_distance(t_game **game)
 	}
 }
 
-
-int	search_minimum_distance(t_case	*valid_case)
+int		search_minimum_distance(t_case *valid_case)
 {
 	int distance;
 
@@ -79,7 +77,7 @@ int	search_minimum_distance(t_case	*valid_case)
 	return (distance);
 }
 
-int	can_put_distance(int **distance_map, int size_x, int size_y)
+int		can_put_distance(int **distance_map, int size_x, int size_y)
 {
 	int i;
 	int j;

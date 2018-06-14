@@ -22,7 +22,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft
-	gcc  -o $(NAME) $(FLAGS) libft/libft.a $(SRC)
+	gcc libft/libft.a $(SRC) -o $(NAME) $(FLAGS) 
 
 comp:
 	gcc -g $(SRC) libft/libft.a

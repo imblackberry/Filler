@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void    ft_join_free(char **s1, char *s2)
+void	ft_join_free(char **s1, char *s2)
 {
 	char *save;
 
