@@ -34,17 +34,17 @@
 
 
 
-void    showarr(char **arr)
-{
-    int i;
+// void    showarr(char **arr)
+// {
+//     int i;
 
-    i = 0;
-    while (arr[i])
-    {
-        fprintf(stderr, "\t\t\t\t\t\t\t\t\t\t\t\t[%d] =\t|%s|\n", i, arr[i]);
-        i++;
-    }
-}
+//     i = 0;
+//     while (arr[i])
+//     {
+//         fprintf(stderr, "[%d] =\t|%s|\n", i, arr[i]);
+//         i++;
+//     }
+// }
 
 
 

@@ -12,27 +12,27 @@
 
 #include "filler.h"
 
-void    show_double_int_arr(int **arr, int size_x, int size_y)
-{
-    int i;
-	int j;
+// void    show_double_int_arr(int **arr, int size_x, int size_y)
+// {
+//     int i;
+// 	int j;
 
-	j = 0;
-    i = 0;
-    while (i < size_y)
-    {
-		j = 0;
-		fprintf(stderr, "[%d]\t", i);
-		while(j < size_x)
-		{
-			fprintf(stderr, "|%d|", arr[i][j]);
-			fprintf(stderr,"\t");
-			j++;
-		}
-        fprintf(stderr,"\n");
-        i++;
-    }
-}
+// 	j = 0;
+//     i = 0;
+//     while (i < size_y)
+//     {
+// 		j = 0;
+// 		fprintf(stderr, "[%d]\t", i);
+// 		while(j < size_x)
+// 		{
+// 			fprintf(stderr, "|%d|", arr[i][j]);
+// 			fprintf(stderr,"\t");
+// 			j++;
+// 		}
+//         fprintf(stderr,"\n");
+//         i++;
+//     }
+// }
 
 
 
@@ -92,22 +92,22 @@ void    show_double_int_arr(int **arr, int size_x, int size_y)
 // 	}
 // }
 
-void	set_result(t_game **game, int min_distance)
-{
-	t_case *valid_case;	
+// void	set_result(t_game **game, int min_distance)
+// {
+// 	t_case *valid_case;	
 
-	valid_case = (*game)->valid_case;
-	while (valid_case)
-	{
-		if (valid_case->distance == min_distance)
-		{
-			(*game)->x = valid_case->x;
-			(*game)->y = valid_case->y;
-			break ;
-		}
-		valid_case = valid_case->next;
-	}
-}
+// 	valid_case = (*game)->valid_case;
+// 	while (valid_case)
+// 	{
+// 		if (valid_case->distance == min_distance)
+// 		{
+// 			(*game)->x = valid_case->x;
+// 			(*game)->y = valid_case->y;
+// 			break ;
+// 		}
+// 		valid_case = valid_case->next;
+// 	}
+// }
 
 // void	search_one_xy_case(t_game **game)
 // {

@@ -13,22 +13,22 @@
 #include "libft/libft.h"
 #include "libft/get_next_line.h"
 
-int main()
-{
-	char *line;
-	int fd;
+// int main()
+// {
+// 	char *line;
+// 	int fd;
 
-	line = NULL;
-	fd = open("test.txt", O_RDONLY);
-	get_next_line(fd, &line);
-	ft_putstr(line);
-	ft_putstr("\n");
-	free(line);
-	line = NULL;
-	get_next_line(fd, &line);
-	ft_putstr(line);
-	ft_putstr("\n");
-	free(line);
-	line = NULL;
-	return (0);
-}
+// 	line = NULL;
+// 	fd = open("test.txt", O_RDONLY);
+// 	get_next_line(fd, &line);
+// 	ft_putstr(line);
+// 	ft_putstr("\n");
+// 	free(line);
+// 	line = NULL;
+// 	get_next_line(fd, &line);
+// 	ft_putstr(line);
+// 	ft_putstr("\n");
+// 	free(line);
+// 	line = NULL;
+// 	return (0);
+// }
