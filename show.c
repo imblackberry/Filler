@@ -18,24 +18,24 @@ int main()
     initscr();
 	map_w = newwin(100, 100, 0, 0);
 	
-	wborder(map_w, '|', '|', '_', '_', '*', '*', '*', '*');
+	box(map_w, '*', '*');
     wrefresh(map_w);
+	// wtimeout(map_w, 0);
 	while(game_arr[i])
 	{
-        
-        
         while(game_arr[i] && !ft_strstr(game_arr[i], "Plateau"))
             i++;
-
-        // mvwprintw(map_w, 1, 1, "_________________\n");
+		if (game_arr[i] == NULL)
+			break ;
+        mvwprintw(map_w, 1, 1, "_________________\n");
 		show_map(map_w, game_arr + i);
         // show_map_with_piece(game_arr + i);
-
+		usleep(30000);
         wrefresh(map_w);
         i++;
 	}
     
-    // getch();                     // Ожидание нажатия какой-либо клавиши пользователем
+    getch();                     // Ожидание нажатия какой-либо клавиши пользователем
     endwin();                    // Выход из curses-режима. Обязательная команда.
     return (0);
 }
