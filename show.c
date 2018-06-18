@@ -3,7 +3,7 @@
 # include "filler.h"
 char	**read_filler();
 char	set_show_sign();
-void    show_map(char **game_arr);
+void    show_map(WINDOW *map_w, char **game_arr);
 
 int main()
 {
@@ -15,28 +15,28 @@ int main()
     game_arr = read_filler();
     
     // system("leaks a.out");
-    // initscr();
-	// map_w = newwin(20, 20, 0, 0);
-	// refresh();
+    initscr();
+	map_w = newwin(100, 100, 0, 0);
 	
-	// wborder(map_w, '|', '|', '_', '_', '*', '*', '*', '*');
-    // wrefresh(map_w);
-
-	while(1)
+	wborder(map_w, '|', '|', '_', '_', '*', '*', '*', '*');
+    wrefresh(map_w);
+	while(game_arr[i])
 	{
         
-        while(!ft_strstr(game_arr[i], "Plateau"))
+        
+        while(game_arr[i] && !ft_strstr(game_arr[i], "Plateau"))
             i++;
-        fprintf(stderr, "_________________\n");
-		show_map(game_arr + i);
+
+        // mvwprintw(map_w, 1, 1, "_________________\n");
+		show_map(map_w, game_arr + i);
         // show_map_with_piece(game_arr + i);
 
-	// 	wrefresh(map_w);
+        wrefresh(map_w);
         i++;
 	}
-
+    
     // getch();                     // Ожидание нажатия какой-либо клавиши пользователем
-    // endwin();                    // Выход из curses-режима. Обязательная команда.
+    endwin();                    // Выход из curses-режима. Обязательная команда.
     return (0);
 }
 char    *save_show_file();
@@ -44,7 +44,7 @@ void    save_game_file(char **file, char *line);
 void	set_show_map_size(t_square **map, char *size_str);
 
 
-void    show_map(char **game_arr)
+void    show_map(WINDOW *map_w, char **game_arr)
 {
     int i;
     int j;
@@ -59,10 +59,10 @@ void    show_map(char **game_arr)
         j = START_MAP_X;
         while (j < show_map->size_x + START_MAP_X)
         {
-            fprintf(stderr, "%c", game_arr[i][j]);
+            mvwprintw(map_w, i, j, "%c", game_arr[i][j]);
+            wrefresh(map_w);
             j++;
         }
-        fprintf(stderr, "\n");
         i++;
     }
 }
@@ -106,7 +106,7 @@ char    *save_show_file()
     while (get_next_line(0, &line) > 0)
     {           
         save_game_file(&file, line);
-        if (ft_strstr(line, "== X fin: ") || ft_strstr(line, "stop"))
+        if (ft_strstr(line, "== X fin: "))
             break ;
         ft_strdel(&line);
     }
