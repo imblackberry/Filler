@@ -16,7 +16,20 @@ int search_new_map_position(char **game_arr)
             i++;
 	return (i);
 }
-
+void set_windows(t_square *show_map, WINDOW **map_w, WINDOW **score_w)
+{
+    *map_w = newwin(show_map->size_y + (START_MAP_Y * 2), show_map->size_x + (START_MAP_X * 2), 0, 0);
+	*score_w = newwin(5, 21, 0, show_map->size_x + (START_MAP_X * 3));
+	box(*map_w, '*', '*');
+    wrefresh(*map_w);
+	box(*score_w, '*', '*');
+}
+void show_score(WINDOW **score_w)
+{
+    mvwprintw(*score_w, 2, 10, "SCORE");
+	wrefresh(*score_w);
+	usleep(3000000);
+}
 int main()
 {
 	WINDOW *map_w;
@@ -30,21 +43,13 @@ int main()
 	i = search_new_map_position(game_arr);
     set_show_map_size(&show_map, game_arr[i]);
     initscr();
-	map_w = newwin(show_map->size_y + (START_MAP_Y * 2), show_map->size_x + (START_MAP_X * 2), 0, 0);
-	score_w = newwin(5, 21, 0, show_map->size_x + (START_MAP_X * 3));
-	box(map_w, '*', '*');
-    wrefresh(map_w);
-	box(score_w, '*', '*');
-    wrefresh(score_w);
+    set_windows(show_map, &map_w, &score_w);
 	while(game_arr[i])
 	{	
 		i += search_new_map_position(game_arr + i);
 		if (game_arr[i] == NULL)
 		{
-			mvwprintw(score_w, 2, 10, "SCORE");
-			wrefresh(score_w);
-			usleep(3000000);
-			wrefresh(map_w);
+            show_score(&score_w);
 			break ;
 		}
 		show_game_map(map_w, game_arr + i, show_map);
