@@ -23,8 +23,8 @@ void	assign_null(int *a, int *b, int *c, int *d)
 int		read_to_end(char **line, int *to_end, int *i)
 {
 	int ret;
-	ret = 1;
 
+	ret = 1;
 	if (get_next_line(0, line) <= 0 || (!ft_strcmp("", (*line)) && !(*to_end)))
 		ret = -1;
 	
