@@ -27,6 +27,9 @@ $(NAME): $(OBJ)
 comp:
 	gcc -g $(SRC) libft/libft.a
 
+showing:
+	gcc ./bonus/main.c ./bonus/read_filler.c ./bonus/show_score.c ./bonus/show_filler.c ./libft/libft.a -lncurses -o ./bonus/showing
+
 norm:
 	norminette -R CheckForbiddenSourceHeader
 

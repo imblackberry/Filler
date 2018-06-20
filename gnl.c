@@ -12,23 +12,27 @@
 
 #include "libft/libft.h"
 #include "libft/get_next_line.h"
+#include <stdio.h>
 
-// int main()
-// {
-// 	char *line;
-// 	int fd;
+int main()
+{
+	char *line;
+	char	buff[10];
+	// int fd;
 
-// 	line = NULL;
-// 	fd = open("test.txt", O_RDONLY);
-// 	get_next_line(fd, &line);
-// 	ft_putstr(line);
-// 	ft_putstr("\n");
-// 	free(line);
-// 	line = NULL;
-// 	get_next_line(fd, &line);
-// 	ft_putstr(line);
-// 	ft_putstr("\n");
-// 	free(line);
-// 	line = NULL;
-// 	return (0);
-// }
+	line = NULL;
+	// fd = open("test.txt", O_RDONLY);
+	// printf("before a loop\n");
+	while (read(0, buff, 10))//get_next_line(0, &line))
+	{
+		write(1, "|", 1);
+		write(1, buff, 10);
+		write(1, "|\n", 2);
+		// printf("in the loop\n");
+		// printf("|%s|\n", line);
+		// free(line);
+	}
+	// printf("after the loop\n");
+	// close(fd);
+	return (0);
+}

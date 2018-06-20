@@ -58,7 +58,7 @@ void			ft_tail(t_struct p, t_mylst **head)
 		p.str = NULL;
 	}
 }
-
+#include <stdio.h>
 int				get_next_line(const int fd, char **line)
 {
 	char			buf[BUFF_SIZE + 1];
@@ -70,8 +70,10 @@ int				get_next_line(const int fd, char **line)
 		return (-1);
 	head = lst;
 	ft_lstaddfirst(&head, fd, &lst);
-	while ((p.ret = read(fd, buf, BUFF_SIZE)) && p.ret == BUFF_SIZE)
+	// fprintf(stderr, "before a loop\n");
+	while ((p.ret = read(fd, buf, BUFF_SIZE)))
 	{
+		// fprintf(stderr, "after read\n");
 		buf[p.ret] = '\0';
 		p.str = head->content;
 		head->content = ft_strjoin(head->content, buf);
@@ -79,8 +81,9 @@ int				get_next_line(const int fd, char **line)
 		p.str = NULL;
 		if (ft_strchr(head->content, '\n'))
 			break ;
-
+		// fprintf(stderr, "next iter\n");
 	}
+	// fprintf(stderr, "after the loop\n");
 	*line = ft_strsub(head->content, 0, ft_line_size(head->content));
 	p.k = ft_strlen(head->content) == 0 ? 1 : 0;
 	ft_tail(p, &head);

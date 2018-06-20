@@ -15,6 +15,7 @@
 int		main(void)
 {
 	t_game *game;
+
 	game = NULL;
 	start_game(&game);
 	free_game(&game);
