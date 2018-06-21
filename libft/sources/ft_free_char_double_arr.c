@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_free_char_double_arr.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblokha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/07 16:50:17 by vblokha           #+#    #+#             */
-/*   Updated: 2017/12/07 16:55:49 by vblokha          ###   ########.fr       */
+/*   Created: 2018/06/12 19:48:48 by vblokha           #+#    #+#             */
+/*   Updated: 2018/06/12 19:48:51 by vblokha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include "../includes/libft.h"
-# define BUFF_SIZE 1
+#include "../includes/libft.h"
 
-typedef	struct		s_mylst
+void	ft_free_char_double_arr(char ***arr)
 {
-	int				fd;
-	char			*content;
-	struct s_mylst	*next;
-}					t_mylst;
-typedef	struct		s_struct
-{
-	char			*str;
-	int				ret;
-	int				k;
-}					t_struct;
-int					get_next_line(const int fd, char **line);
+	int i;
 
-#endif
+	i = 0;
+	if (!arr || !*arr)
+		return ;
+	while (arr[0][i])
+	{
+		ft_strdel(&arr[0][i]);
+		i++;
+	}
+	free(arr[0]);
+	arr[0] = NULL;
+}

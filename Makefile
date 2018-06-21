@@ -14,21 +14,29 @@ NAME = vblokha.filler
 
 SRC = start_game.c turn.c case.c distance.c free_game.c point.c save_file.c set_map_and_piece.c
 
-OBJ = ./$(SRC:.c=.o)
+SRCDIR = sources/
+
+OBJDIR = objects/
+
+OBJ =  $(addprefix $(OBJDIR), $(SRC:.c=.o))
 
 FLAGS = -Wall -Wextra -Werror
 
+LIBFT = libft.a
+
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(LIBFT) $(OBJDIR) $(OBJ)
+	gcc $(OBJ) libft/libft.a -o $(NAME)
+
+$(LIBFT):
 	make -C libft
-	gcc libft/libft.a $(SRC) -o $(NAME) $(FLAGS) 
 
-comp:
-	gcc -g $(SRC) libft/libft.a
+$(OBJDIR):
+	mkdir $(OBJDIR)
 
-showing:
-	gcc ./bonus/main.c ./bonus/read_filler.c ./bonus/show_score.c ./bonus/show_filler.c ./libft/libft.a -lncurses -o ./bonus/showing
+$(OBJ): $(OBJDIR)%.o : $(SRCDIR)%.c
+	gcc $(FLAGS) -I headers/filler.h -c $< -o $@
 
 norm:
 	norminette -R CheckForbiddenSourceHeader

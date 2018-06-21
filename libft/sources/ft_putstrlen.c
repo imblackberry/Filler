@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putstrlen.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblokha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/07 16:50:17 by vblokha           #+#    #+#             */
-/*   Updated: 2017/12/07 16:55:49 by vblokha          ###   ########.fr       */
+/*   Created: 2018/03/19 18:08:35 by vblokha           #+#    #+#             */
+/*   Updated: 2018/04/10 15:45:44 by vblokha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include "../includes/libft.h"
-# define BUFF_SIZE 1
+#include "../includes/libft.h"
 
-typedef	struct		s_mylst
+unsigned long long int	ft_putstrlen(char *str, int len)
 {
-	int				fd;
-	char			*content;
-	struct s_mylst	*next;
-}					t_mylst;
-typedef	struct		s_struct
-{
-	char			*str;
-	int				ret;
-	int				k;
-}					t_struct;
-int					get_next_line(const int fd, char **line);
+	int						i;
+	unsigned long long int	r_len;
 
-#endif
+	r_len = 0;
+	i = 0;
+	if (len <= 0)
+		return (r_len);
+	while (str[i] && i < len)
+		r_len = r_len + write(1, str + i++, 1);
+	return (r_len);
+}

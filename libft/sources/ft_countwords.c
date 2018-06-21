@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_countwords.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblokha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/07 16:50:17 by vblokha           #+#    #+#             */
-/*   Updated: 2017/12/07 16:55:49 by vblokha          ###   ########.fr       */
+/*   Created: 2017/11/20 15:10:18 by vblokha           #+#    #+#             */
+/*   Updated: 2017/11/20 15:17:36 by vblokha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include "../includes/libft.h"
-# define BUFF_SIZE 1
+#include "../includes/libft.h"
 
-typedef	struct		s_mylst
+size_t	ft_countwords(char const *s, char c)
 {
-	int				fd;
-	char			*content;
-	struct s_mylst	*next;
-}					t_mylst;
-typedef	struct		s_struct
-{
-	char			*str;
-	int				ret;
-	int				k;
-}					t_struct;
-int					get_next_line(const int fd, char **line);
+	size_t	count;
+	size_t	status;
 
-#endif
+	status = 0;
+	count = 0;
+	while (*s)
+	{
+		if (*s == c)
+			status = 0;
+		else if (status == 0)
+		{
+			status = 1;
+			count++;
+		}
+		s++;
+	}
+	return (count);
+}

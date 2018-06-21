@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblokha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/07 16:50:17 by vblokha           #+#    #+#             */
-/*   Updated: 2017/12/07 16:55:49 by vblokha          ###   ########.fr       */
+/*   Created: 2017/11/13 18:52:01 by vblokha           #+#    #+#             */
+/*   Updated: 2017/11/14 15:48:23 by vblokha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include "../includes/libft.h"
-# define BUFF_SIZE 1
+#include "../includes/libft.h"
 
-typedef	struct		s_mylst
+void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
 {
-	int				fd;
-	char			*content;
-	struct s_mylst	*next;
-}					t_mylst;
-typedef	struct		s_struct
-{
-	char			*str;
-	int				ret;
-	int				k;
-}					t_struct;
-int					get_next_line(const int fd, char **line);
+	t_list **new;
 
-#endif
+	new = alst;
+	del((*alst)->content, (*alst)->content_size);
+	free(*alst);
+	*alst = NULL;
+}

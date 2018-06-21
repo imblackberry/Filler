@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# include "get_next_line.h"
 
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t				ft_strlen(const char *str);
@@ -89,7 +90,7 @@ typedef	struct		s_list
 t_list				*ft_lstnew(void const *content, size_t
 	content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
-void				ft_lstadd(t_list **alst, t_list *new);
+void				ft_lstadd(t_list **alst, t_list *newlst);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_lstdel(t_list **alst, void (*del)(void *,
@@ -106,4 +107,10 @@ unsigned long long	ft_putnbr_u(unsigned long long int n);
 unsigned long long	ft_putstrlen(char *str, int len);
 int					ft_s_num_width(long long int n, int div);
 int					ft_u_num_width(unsigned long long int n, int div);
+void				ft_free_char_double_arr(char ***arr);
+int					compare_to_upper_and_low(char c, char lower_virsion);
+void				ft_join_free(char **s1, char *s2);
+void				ft_free_int_double_arr(int ***arr, int size_y);
+int					**ft_new_double_int_arr(int size_x, int size_y);
+
 #endif
