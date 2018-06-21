@@ -27,26 +27,28 @@ LIBFT = libft.a
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJDIR) $(OBJ)
-	gcc $(OBJ) libft/libft.a -o $(NAME)
+	@gcc $(OBJ) libft/libft.a -o $(NAME)
+	@echo MADE PLAYER
 
 $(LIBFT):
-	make -C libft
+	@make -C libft
 
 $(OBJDIR):
-	mkdir $(OBJDIR)
+	@mkdir $(OBJDIR)
 
 $(OBJ): $(OBJDIR)%.o : $(SRCDIR)%.c
-	gcc $(FLAGS) -I headers/filler.h -c $< -o $@
+	@gcc $(FLAGS) -I headers/filler.h -c $< -o $@
 
 norm:
 	norminette -R CheckForbiddenSourceHeader
 
 clean:
-	make clean -C libft
-	rm -f $(OBJ)
+	@make clean -C libft
+	@rm -rf $(OBJDIR)
 
 fclean: clean
-	make fclean -C libft
-	rm -f $(NAME)
+	@make fclean -C libft
+	@echo clean PLAYER
+	@rm -f $(NAME)
 
 re: fclean all

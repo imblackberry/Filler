@@ -42,10 +42,10 @@ $(NAME): $(OBJDIR) $(OBJ)
 	@echo "made all objects"
 	@ar rc $(NAME) $(OBJ)
 	@echo "made lib"
-	ranlib $(NAME)
+	@ranlib $(NAME)
 
 $(OBJDIR):
-	mkdir $(OBJDIR)
+	@mkdir $(OBJDIR)
 
 $(OBJ): $(OBJDIR)%.o : $(SRCDIR)%.c
 	@gcc -Wall -Wextra -Werror -I $(INC) -c $< -o $@
