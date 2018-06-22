@@ -65,15 +65,19 @@ void	set_opponent_sign(t_game **game)
 		(*game)->opponent_sign = 'X';
 }
 
-void	set_player_sign(t_game **game)
+
+int	set_player_sign(t_game **game)
 {
 	char *line;
 
 	line = NULL;
 	get_next_line(0, &line);
+    if (line == NULL)
+        return (-1);
 	if (line[10] == '1')
 		(*game)->my_sign = 'O';
 	else if (line[10] == '2')
 		(*game)->my_sign = 'X';
 	ft_strdel(&line);
+    return (0);
 }

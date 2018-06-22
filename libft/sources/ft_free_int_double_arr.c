@@ -17,7 +17,7 @@ void	ft_free_int_double_arr(int ***arr, int size_y)
 	int i;
 
 	i = 0;
-	if (*arr != NULL)
+	if (*arr == NULL)
 		return ;
 	while (i < size_y)
 		free(arr[0][i++]);

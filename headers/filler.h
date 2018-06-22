@@ -16,6 +16,7 @@
 # include "struct.h"
 # include "functions.h"
 # include "../libft/includes/libft.h"
+# include <stdio.h>
 
 # define NEW -1
 # define PIECE 5
