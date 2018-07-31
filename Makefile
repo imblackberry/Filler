@@ -42,6 +42,9 @@ $(OBJ): $(OBJDIR)%.o : $(SRCDIR)%.c
 norm:
 	norminette -R CheckForbiddenSourceHeader
 
+showing:
+	gcc ./bonus/main.c ./bonus/read_filler.c ./bonus/show_score.c ./bonus/show_filler.c ./libft/libft.a -lncurses -o ./bonus/showing
+
 clean:
 	@make clean -C libft
 	@rm -rf $(OBJDIR)
