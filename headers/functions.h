@@ -16,7 +16,7 @@
 void		start_game(t_game **game);
 void		set_game_struct(t_game **game);
 void		set_opponent_sign(t_game **game);
-int		set_player_sign(t_game **game);
+int			set_player_sign(t_game **game);
 int			set_game(t_game **game);
 int			put_piece_everywhere(t_game **game);
 void		search_one_xy_case(t_game **game);
